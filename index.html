@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DEMO - SMART MENU</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: Arial, sans-serif; background: #f4f4f4; color: #333; transition: 0.3s; overflow-y: auto; }
+       
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, Arial, "Helvetica Neue", sans-serif;
+        }
+        body { background: #f4f4f4; color: #333; transition: 0.3s; overflow-y: auto; }
         body.dark { background: #121212; color: white; }
         /* HEADER & BANNER */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: white; border-bottom: 1px solid #ddd; height: 70px; position: sticky; top: 0; z-index: 2000; }
@@ -19,7 +25,7 @@
         /* CẤU TRÚC SEARCH TRÊN HEADER */
         .search-container { display: flex; align-items: center; background: #f9f9f9; border: 1px solid #ddd; border-radius: 20px; padding: 5px 12px; width: 200px; transition: 0.3s; }
         body.dark .search-container { background: #2a2a2a; border-color: #444; }
-        #search-input { border: none; outline: none; background: transparent; color: inherit; font-size: 13px; width: 100%; }
+        #search-input { border: none; outline: none; background: transparent; color: inherit; font-size: 13px; width: 100%; font-family: inherit; }
         /* BANNER SLIDER */
         .banner {
             width: 100%;
@@ -32,14 +38,13 @@
             overflow: hidden;
             position: relative;
             height: 300px;
-            /* Đã xóa touch-action và cursor để chặn tương tác người dùng */
         }
         .banner-container {
             display: flex;
             width: 100%;
             height: 100%;
             user-select: none;
-            pointer-events: none; /* Chặn hoàn toàn tương tác chuột/cảm ứng */
+            pointer-events: none;
         }
         .banner-container img {
             min-width: 100%;
@@ -65,7 +70,7 @@
         .article-card:hover { transform: translateY(-5px); }
         body.dark .article-card { background: #1e1e1e; }
         .img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; background: #eee; }
-        .article-title { margin: 10px 0 5px; font-size: 0.95rem; height: 2.4em; overflow: hidden; }
+        .article-title { margin: 10px 0 5px; font-size: 0.95rem; height: 2.4em; overflow: hidden; font-weight: bold; }
         .article-desc { color: #d35400; margin-bottom: 10px; font-weight: bold; }
         .btn-more { display: block; text-align: center; padding: 8px; background: #00aeef; color: white; text-decoration: none; border-radius: 5px; font-size: 0.85em; font-weight: bold; }
         /* SIDEBAR */
@@ -76,24 +81,24 @@
         .cart-section { padding: 15px; max-height: 60vh; overflow-y: auto; }
         .footer-payment { padding: 15px; border-top: 1px solid #eee; }
         .total { font-weight: bold; color: #d35400; font-size: 18px; display: flex; justify-content: space-between; margin-top: 10px; }
-        .submit-btn { width: 100%; background: #d35400; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 10px; cursor: pointer; }
+        .submit-btn { width: 100%; background: #d35400; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 10px; cursor: pointer; font-family: inherit; }
         .item { display: flex; margin-bottom: 15px; align-items: center; gap: 10px; }
         .item-img { width: 45px; height: 45px; border-radius: 5px; object-fit: cover; }
         .btn-qty { width: 22px; height: 22px; border: 1px solid #ddd; background: white; border-radius: 50%; cursor: pointer; }
         /* MODALS & TOAST */
         #invoice-modal, .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; justify-content: center; align-items: center; padding: 20px; }
-        .invoice-content { background: white; padding: 20px; width: 100%; max-width: 350px; border-radius: 8px; color: #000; font-family: 'Courier New', Courier, monospace; max-height: 90vh; overflow-y: auto; }
+        .invoice-content { background: white; padding: 20px; width: 100%; max-width: 350px; border-radius: 8px; color: #000; max-height: 90vh; overflow-y: auto; }
         .invoice-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
         .invoice-table th { border-bottom: 1px dashed #000; padding: 5px 0; text-align: left; }
         .col-name { width: 45%; } .col-price, .col-qty { text-align: center; } .col-total { text-align: right; }
         .total-row { border-top: 1px dashed #000; font-weight: bold; margin-top: 10px; padding-top: 5px; }
-        .close-invoice { margin-top: 20px; width: 100%; padding: 12px; background: #333; color: white; border: none; cursor: pointer; border-radius: 5px; font-weight: bold; }
+        .close-invoice { margin-top: 20px; width: 100%; padding: 12px; background: #333; color: white; border: none; cursor: pointer; border-radius: 5px; font-weight: bold; font-family: inherit; }
         .modal-box { background: white; width: 100%; max-width: 320px; border-radius: 15px; padding: 30px 20px; text-align: center; color: #333; }
         .modal-icon { width: 50px; height: 50px; background: #27ae60; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 25px; margin: 0 auto 15px; }
         .modal-title { font-weight: bold; font-size: 16px; margin-bottom: 10px; color: #d35400; }
-        .modal-btn { background: #d35400; color: white; border: none; padding: 12px; border-radius: 25px; font-weight: bold; cursor: pointer; width: 100%; }
+        .modal-btn { background: #d35400; color: white; border: none; padding: 12px; border-radius: 25px; font-weight: bold; cursor: pointer; width: 100%; font-family: inherit; }
         #toast-container { position: fixed; top: 85px; right: 20px; z-index: 9999; }
-        .toast { background: #27ae60; color: white; padding: 10px 20px; border-radius: 5px; margin-bottom: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); animation: slideIn 0.3s ease; }
+        .toast { background: #27ae60; color: white; padding: 10px 20px; border-radius: 5px; margin-bottom: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); animation: slideIn 0.3s ease; font-size: 14px; }
         @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
         #global-note { width: 100%; margin-top: 5px; padding: 8px; font-size: 12px; border: 1px solid #ccc; border-radius: 4px; resize: none; outline: none; font-family: inherit; color: #333; }
         /* MOBILE OPTIMIZATION */
@@ -133,15 +138,17 @@
     </div>
 </header>
 
+
 <div class="banner" id="banner-slider-wrapper">
     <div class="banner-container" id="banner-slider">
         <img src="https://raw.githubusercontent.com/DuongLQPTIT/pop-quan-an/refs/heads/main/661366807_4223851564532530_1368547044873374033_n.png">
-        <img src="https://github.com/DuongLQPTIT/pop-quan-an/blob/main/2.jpg?raw=true&fbclid=IwZXh0bgNhZW0CMTAAYnJpZBExZGkxd29lNjNXS0x3YXk0UHNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR7VDBshzGLfu12AIA6xHKVJjIngcq1DDit2V5mhUX6JYVxe8b7ymY2elTZqGQ_aem_gwJRVE4tiWxWSFZg7ZJdXg">
-        <img src="https://github.com/DuongLQPTIT/pop-quan-an/blob/main/3.jpg?raw=true&fbclid=IwZXh0bgNhZW0CMTAAYnJpZBExZGkxd29lNjNXS0x3YXk0UHNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR4FyIighlM6pCC-RjUcHBkYIs0jiWpKaaCbyLDd8ND4a9LYBV6YKwV93pL4pQ_aem_t8qFXgBCrejyNM5N4YfNJg">
-        <img src="https://github.com/DuongLQPTIT/pop-quan-an/blob/main/4.jpg?raw=true&fbclid=IwZXh0bgNhZW0CMTAAYnJpZBExZGkxd29lNjNXS0x3YXk0UHNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR7jDHG8zOBDCdMVN8W5UjB4dkbs7Sq6HuSd0jNE8Qvl-XHsPnbFrsqnjyzPfw_aem_4QZfkHG7HdNo5KRsBXJtPw">
-        <img src="https://github.com/DuongLQPTIT/pop-quan-an/blob/main/5.jpg?raw=true&fbclid=IwZXh0bgNhZW0CMTAAYnJpZBExZGkxd29lNjNXS0x3YXk0UHNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR4FyIighlM6pCC-RjUcHBkYIs0jiWpKaaCbyLDd8ND4a9LYBV6YKwV93pL4pQ_aem_t8qFXgBCrejyNM5N4YfNJg">
+        <img src="https://github.com/DuongLQPTIT/pop-quan-an/blob/main/2.jpg?raw=true">
+        <img src="https://github.com/DuongLQPTIT/pop-quan-an/blob/main/3.jpg?raw=true">
+        <img src="https://github.com/DuongLQPTIT/pop-quan-an/blob/main/4.jpg?raw=true">
+        <img src="https://github.com/DuongLQPTIT/pop-quan-an/blob/main/5.jpg?raw=true">
     </div>
 </div>
+
 
 <main class="main-container">
     <section class="content-area">
@@ -154,6 +161,7 @@
         </div>
         <div class="article-grid" id="menu-grid"></div>
     </section>
+
 
     <aside class="sidebar" id="mobile-sidebar">
         <div class="cart-header" onclick="toggleMobileCart()">
@@ -172,10 +180,11 @@
     </aside>
 </main>
 
+
 <div id="invoice-modal">
     <div class="invoice-content">
         <div style="text-align: center;">
-            <h2 style="margin:0">HÓA ĐƠN</h2>
+            <h2 style="margin:0; font-family: inherit;">HÓA ĐƠN</h2>
             <p>------------------------------</p>
         </div>
         <table class="invoice-table">
@@ -196,6 +205,7 @@
     </div>
 </div>
 
+
 <div class="modal-overlay" id="orderModal">
     <div class="modal-box">
         <div class="modal-icon">✓</div>
@@ -205,17 +215,20 @@
     </div>
 </div>
 
+
 <div class="nav-arrows">
     <button class="arrow-btn btn-call" onclick="callStaff()" title="Gọi phục vụ">🔔</button>
     <button class="arrow-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">▲</button>
     <button class="arrow-btn" onclick="document.getElementById('menu-grid').scrollIntoView({behavior: 'smooth', block: 'end'})">▼</button>
 </div>
 
+
 <footer style="background: #001a33; color: white; text-align: center; padding: 20px; margin-top: 30px; font-size: 13px; line-height: 1.6;">
     <p>📍 Địa chỉ: 12B Thị Xá, Gia Phúc, TP Hải Phòng</p>
     <p>📞 <b>Hotline:</b> 0356 378 392 | <b>Email:</b> bepviet.info@gmail.com</p>
     <p style="opacity: 0.7; margin-top: 10px;"> © 2026 Bep Viet Restaurant. All rights reserved.</p>
 </footer>
+
 
 <script>
     const BANK_ID = "MB";
@@ -256,6 +269,7 @@
     let cart = [];
     let timerInterval;
     let currentCategory = 'main';
+
 
     function toggleDark() { document.body.classList.toggle("dark"); }
     function showToast(msg) {
@@ -327,7 +341,7 @@
                     <img src="${item.img}" class="item-img" onerror="this.src='https://via.placeholder.com/50'">
                     <div style="flex:1">
                         <div style="font-weight:bold; font-size:13px;">${item.name}</div>
-                        <input type="text" style="width: 100%; margin-top: 5px; padding: 4px; font-size: 11px; border: 1px solid #eee; border-radius: 4px; outline: none; color: #d35400;" placeholder="Ghi chú (VD: Muốn mang về X phần; ít cay...)" oninput="updateItemNote(${item.id}, this.value)" value="${item.note || ''}">
+                        <input type="text" style="width: 100%; margin-top: 5px; padding: 4px; font-size: 11px; border: 1px solid #eee; border-radius: 4px; outline: none; color: #d35400; font-family: inherit;" placeholder="Ghi chú (VD: Muốn mang về X phần; ít cay...)" oninput="updateItemNote(${item.id}, this.value)" value="${item.note || ''}">
                         <div style="display:flex; align-items:center; gap:8px; margin-top:3px;">
                             <button class="btn-qty" onclick="updateQty(${item.id}, -1)">-</button>
                             <span>${item.qty}</span>
@@ -401,16 +415,19 @@
         }
     }
 
-    // --- LOGIC BANNER SLIDER (AUTO ONLY) ---
+
     const sliderWrapper = document.getElementById('banner-slider-wrapper');
     const slider = document.getElementById('banner-slider');
     let currentIndex = 0;
 
-    // Tự động chuyển ảnh sau 5 giây
+
     setInterval(() => {
-        currentIndex = (currentIndex + 1) % slider.children.length;
-        setSliderPosition();
+        if(slider.children.length > 0) {
+            currentIndex = (currentIndex + 1) % slider.children.length;
+            setSliderPosition();
+        }
     }, 5000);
+
 
     function setSliderPosition() {
         const offset = currentIndex * -sliderWrapper.offsetWidth;
@@ -418,9 +435,13 @@
         slider.style.transform = `translateX(${offset}px)`;
     }
 
+
     window.addEventListener('resize', setSliderPosition);
     renderMenu(menuData.filter(m => m.type === 'main'));
     renderCart();
 </script>
 </body>
 </html>
+
+
+
